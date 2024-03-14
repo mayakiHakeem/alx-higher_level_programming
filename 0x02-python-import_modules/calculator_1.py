@@ -12,7 +12,7 @@ def add(a, b):
     return (a + b)
 
 
-    def sub(a, b):
+def sub(a, b):
     """My subtraction function
 
     Args:
@@ -24,8 +24,7 @@ def add(a, b):
     """
     return (a - b)
 
-
-    def mul(a, b):
+def mul(a, b):
     """My multiplication function
 
     Args:
@@ -38,7 +37,7 @@ def add(a, b):
     return (a * b)
 
 
-    def div(a, b):
+def div(a, b):
     """My division function
 
     Args:
