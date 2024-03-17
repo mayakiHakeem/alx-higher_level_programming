@@ -2,7 +2,7 @@
 
 
 def magic_calculation(a, b):
-    from magic_calculation import add, sub
+    from magic_calculation_102 import add, sub
 
     add, sub = magic_calculation_102.add, magic_calculation_102.sub
     if a < b:
