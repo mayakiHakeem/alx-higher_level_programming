@@ -4,8 +4,6 @@
 def no_c(my_string):
     ctring = ""
     for char in my_string:
-        if char == 'c' or char == 'C':
-            continue
-        else:
+        if char != 'c' or char != 'C':
             ctring += char
     return ctring
