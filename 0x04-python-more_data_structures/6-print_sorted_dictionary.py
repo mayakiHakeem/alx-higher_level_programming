@@ -2,8 +2,4 @@
 
 
 def print_sorted_dictionary(a_dictionary):
-    if a_dictionary:
-        sorted_dict = sorted(a_dictionary.items(), key=lambda x: x[0])
-
-        for x, y in sorted_dict:
-            print("{} : {}".format(x, y))
+    [print("{}: {}".format(x, a_dictionary[x])) for x in sorted(a_dictionary)]
