@@ -11,4 +11,3 @@ def raise_exception_msg(message=""):
         raise TypeError
     except Exception:
         print(message)
-
