@@ -7,17 +7,17 @@ class Square():
        size (int): size to be squared
     """
     def __init__(self, size=0):
-        self.size = size
+        self.__size = size
 
     @property
     def size(self):
         return self.__size
 
     @size.setter
-    def size(self, size):
+    def size(self, value):
         try:
-            assert type(size) == int
-            self.__size = size
+            assert type(value) == int
+            self.__size = value
         except AssertionError:
             raise ValueError("size must be an integer")
         
