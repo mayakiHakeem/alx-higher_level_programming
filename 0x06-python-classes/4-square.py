@@ -19,6 +19,6 @@ class Square():
         if not isinstance(value, int):
             raise ValueError("size must be an integer")
         self.__size = value
-                 
+
     def area(self):
         return self.__size ** 2
