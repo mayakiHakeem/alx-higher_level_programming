@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Class that defines a square"""
 
+
 class Square():
     """Initialize size of square and calc. area
     Attributes:
@@ -20,6 +21,6 @@ class Square():
             self.__size = value
         except AssertionError:
             raise ValueError("size must be an integer")
-        
-    def area(self):
-        return self.__size ** 2
+
+        def area(self):
+            return self.__size ** 2
