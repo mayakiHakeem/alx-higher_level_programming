@@ -22,5 +22,5 @@ class Square():
         except AssertionError:
             raise ValueError("size must be an integer")
 
-        def area(self):
-            return self.__size ** 2
+    def area(self):
+        return self.__size ** 2
