@@ -8,7 +8,7 @@ class Square():
        size (int): size to be squared
     """
     def __init__(self, size=0):
-        self.__size = size
+        self.size = size
 
     @property
     def size(self):
@@ -16,11 +16,9 @@ class Square():
 
     @size.setter
     def size(self, value):
-        try:
-            assert type(value) == int
-            self.__size = value
-        except AssertionError:
+        if not isinstance(value, int):
             raise ValueError("size must be an integer")
-
+        self.__size = value
+                 
     def area(self):
         return self.__size ** 2
