@@ -1,19 +1,37 @@
->>> add_integer = __import__("0-add_integer").add_integer
->>> print(add_integer(1,2))
-3
->>> print(add_integer(100, -2))
-98
->>> print(add_integer(2))
-100
->>> print(add_integer(100.3, -2))
-98
->>> try:
-...     print(add_integer(4, "School"))
-... except Exception as e:
-...     print(e)
-b must be an integer
->>> try:
-...     print(add_integer(None))
-... except Exception as e:
-...     print(e)
-a must be an integer
+>>> add_integer =  __import__("0-add_integer").add_integer
+
+>>> add_integer(3)
+101
+
+>>> add_integer(-1.7)
+97
+
+>>> add_integer(10, 46)
+56
+
+>>> add_integer(12, -2)
+10
+
+>>> add_integer(-1, -1)
+-2
+
+>>> add_integer(5.6, 5)
+10
+
+>>> add_integer(7, 2.1)
+9
+
+>>> add_integer(3.5, 4.5)
+7
+
+>>> add_integer("math", "abacus")
+Traceback (most recent call last):
+    ...
+TypeError: a must be an integer
+
+
+>>> add_integer(42, "number")
+Traceback (most recent call last):
+    ...
+TypeError: b must be an integer
+
