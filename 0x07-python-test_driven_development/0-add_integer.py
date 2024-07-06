@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-
-
 # add_integer.py
+""" defines an integer addition function """
+
+
 def add_integer(a, b=98):
     """
     Does the integeral addition of  two numbers (integers and float)
