@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
-#add_integer.py
+
+# add_integer.py
 def add_integer(a, b=98):
     """
     Does the integeral addition of  two numbers (integers and float)
-    
+
     Parameters:
     a (int or float): first num to add
     b (int or float): second num to add
@@ -18,7 +19,7 @@ def add_integer(a, b=98):
     """
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
-    elif not isinstance (b, (int, float)):
+    elif not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
 
     return int(a) + int(b)
