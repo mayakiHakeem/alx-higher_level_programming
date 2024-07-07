@@ -14,9 +14,17 @@ check: if matrix is a matrix and div is a number > 0
        >>> matrix_divided([[2,4,6],[8,10,12]], 2)
        [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
 
-check: if matrix is the only param
-       >>> matrix_divided([[3,6],[9,12]])
-       [[3.0, 6.0], [9.0, 12.0]]
+check: if matrix missing div param
+       >>> matrix_divided([[3,6],[9,12]], None)
+       Traceback (most recent call last):
+       		 ...
+       TypeError: div must be a number
+
+check: if matrix missing all 2 params
+       >>> matrix_divided(None, None)
+       Traceback (most recent call last):
+       		 ...
+       TypeError: matrix must be a matrix (list of lists) of integers/floats
 
 check: check matrix with unequal row sizes
        >>> matrix_divided([[1, 2], [3, 4, 5]], 2)

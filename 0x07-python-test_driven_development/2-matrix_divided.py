@@ -3,7 +3,7 @@
 "divides every element of a matrix"
 
 
-def matrix_divided(matrix, div=1):
+def matrix_divided(matrix, div):
     """
     Divides every number in a matrix
 
