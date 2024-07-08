@@ -1,0 +1,60 @@
+Test for the say_my_name function
+===================================
+
+  ..
+  ..
+	Import the module
+	>>> say_my_name = __import__('3-say_my_name').say_my_name
+
+===========
+USAGE    ||
+===========
+  ..
+  ..
+  1. Used with the 2 parameters
+	>>> say_my_name("Ajala", "Pele")
+	My name is Ajala Pele
+
+  ..
+  ..
+  2. Used with only the first parameter
+	>>> say_my_name("Ajala")
+	My name is Ajala 
+
+
+============
+TESTS	  ||
+============
+	
+  ..
+  ..
+  1. last_name not a string
+	>>> say_my_name("Ajala", 4)
+	Traceback (most recent call last):
+	...
+	TypeError: last_name must be a string
+
+  ..
+  ..
+  2. first_name not a string
+	>>> say_my_name(4, "Ajala")
+	Traceback (most recent call last):
+	...
+	TypeError: first_name must be a string
+
+
+  ..
+  ..
+  3. No parameter included
+	>>> say_my_name(None, None)
+	Traceback (most recent call last):
+	...
+	TypeError: first_name must be a string
+
+  ..
+  ..
+  4. first_name and last_name not a string
+	>>> say_my_name(4, 4)
+	Traceback (most recent call last):
+	...
+	TypeError: first_name must be a string
