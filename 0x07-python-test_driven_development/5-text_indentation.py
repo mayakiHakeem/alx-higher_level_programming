@@ -5,29 +5,29 @@
 
 
 def text_indentation(text):
-    """A function that indent a text
+    '''This function prints a text with 2 new lines after each ".", "?", or ":"
 
-       Args:
-       text (str): text to indent
+        Args:
+        text (str): The string to be printed
 
-       Exceptions:
-       TypeError: if text is not a string
+        Raises:
+        TypeError: If text is not a string
+    '''
 
-       Returns:
-       None
-    """
-    delim = [':', '.', '?']
     if not isinstance(text, str):
-        raise TypeError('text must be a string')
+        raise TypeError("text must be a string")
 
-    c = 0
-    while c < len(text) and text[c] == ' ':
-        c += 1
+    count = 0
+    while count < len(text) and text[count] == " ":
+        count = count + 1
 
-    for i in range(c, len(text)):
-        if text[i] in delim:
-            print(text[i] + "\n")
-        elif text[i - 1] in delim and text[i] == " ":
+    while count < len(text):
+        print(text[count], end="")
+        if text[count] == "\n" or text[count] in ".?:":
+            if text[count] in ".?:":
+                print("\n")
+            count = count + 1
+            while count < len(text) and text[count] == " ":
+                count = count + 1
             continue
-        else:
-            print(text[i], end='')
+        count = count + 1
