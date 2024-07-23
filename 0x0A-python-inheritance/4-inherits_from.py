@@ -1,4 +1,4 @@
-#!/usr/bin
+#!/usr/bin/python3
 # 4-inherits_from.py
 """A module that check class of an object"""
 
