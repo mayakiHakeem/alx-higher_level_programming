@@ -3,5 +3,7 @@
 """Define a geometry module"""
 
 
-class BaseGeometry:
+class BaseGeometry():
+    """An empty geometry class
+    """
     pass
