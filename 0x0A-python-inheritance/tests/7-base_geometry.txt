@@ -7,6 +7,7 @@ Import module:
   >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 Usage and Tests:
+****************
   ..
   ..
   >>> bg = BaseGeometry()
@@ -20,7 +21,7 @@ Usage and Tests:
   >>> bg.integer_validator("shape", "nano")
   Traceback (most recent call last):
   ...
-  TypeError: age must be an integer
+  TypeError: shape must be an integer
 
   ..
   ..
@@ -41,14 +42,14 @@ Usage and Tests:
   >>> bg.integer_validator("shape", -4)
   Traceback (most recent call last):
   ...
-  ValueError: age must be greater than 0
+  ValueError: shape must be greater than 0
 
   ..
   ..
   >>> bg.integer_validator("shape", 0)
   Traceback (most recent call last):
   ...
-  ValueError: age must be greater than 0
+  ValueError: shape must be greater than 0
 
   ..
   ..
@@ -56,3 +57,10 @@ Usage and Tests:
   Traceback (most recent call last):
   ...
   TypeError: age must be an integer
+
+  ..
+  ..
+  >>> bg.integer_validator("name", "john")
+  Traceback (most recent call last):
+  ...
+  TypeError: name must be an integer
