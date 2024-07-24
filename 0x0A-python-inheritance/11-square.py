@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# 10-square.py
+# 11-square.py
 """Module that define a square class off a rectangle class"""
 Rectangle = __import__('9-rectangle').Rectangle
 
