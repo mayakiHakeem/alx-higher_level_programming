@@ -12,6 +12,6 @@ except Exception:
     arg_list = []
 
 for i in range(1, len(sys.argv)):
-        arg_list.append(sys.argv[i])
+    arg_list.append(sys.argv[i])
 
 save_to_json_file(arg_list, "add_item.json")
