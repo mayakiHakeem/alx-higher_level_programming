@@ -3,6 +3,7 @@
 """Defines the rectangle class inheriting from base"""
 from models.base import Base
 
+
 class Rectangle(Base):
     """Initialize a new rectangle instance with an optional ID."""
 
@@ -41,6 +42,6 @@ class Rectangle(Base):
     def y(self):
         return self.__y
 
-    @width.setter
+    @y.setter
     def y(self, value):
         self.__y = value
