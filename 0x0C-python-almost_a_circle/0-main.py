@@ -18,3 +18,12 @@ if __name__ == "__main__":
 
     b5 = Base()
     print(b5.id)
+
+    b6 = Base("Hooli")
+    print(b6.id)
+
+    b7 = Base({'a': 1, 'b': 2, 'c': 3})
+    print(b7.id)
+
+    b8 = Base(40, 12)
+    print(b8.id)
