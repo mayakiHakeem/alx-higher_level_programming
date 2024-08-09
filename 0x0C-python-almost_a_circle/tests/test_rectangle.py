@@ -3,6 +3,8 @@
 """Test the rectangle class"""
 import unittest
 from models.rectangle import Rectangle, Base
+import io
+from unittest.mock import patch
 
 
 class TestRectangle_Instantiation(unittest.TestCase):
@@ -63,25 +65,21 @@ class TestRectangle_Instantiation(unittest.TestCase):
 
     def test_private_width(self):
         rect = Rectangle(10, 20, 5, 7, 49)
-
         with self.assertRaises(AttributeError):
             print(rect.__width)
 
     def test_private_height(self):
         rect = Rectangle(10, 20, 5, 7, 49)
-
         with self.assertRaises(AttributeError):
             print(rect.__height)
 
     def test_private_x(self):
         rect = Rectangle(10, 20, 5, 7, 49)
-
         with self.assertRaises(AttributeError):
             print(rect.__x)
 
     def test_private_y(self):
         rect = Rectangle(10, 20, 5, 7, 49)
-
         with self.assertRaises(AttributeError):
             print(rect.__y)
 
@@ -162,3 +160,59 @@ class TestRectangle_Area(unittest.TestCase):
     def test_height_not_int(self):
         with self.assertRaises(TypeError):
             rect = Rectangle(10, "C is fun")
+
+    def test_area_0_attr_rect(self):
+        with self.assertRaises(TypeError):
+            rect7 = Rectangle()
+
+    def test_area_1_attr_rect(self):
+        with self.assertRaises(TypeError):
+            rect7 = Rectangle(4)
+
+    def test_area_excess_attrs(self):
+        with self.assertRaises(TypeError):
+            rect7 = Rectangle(*(range(5, 11)))
+
+class TestRectangle_Display(unittest.TestCase):
+
+    def test_display_valid(self):
+        r6 = Rectangle(4, 3)
+        with patch("sys.stdout", new=io.StringIO()) as displayed_output:
+            r6.display()
+            self.assertEqual(displayed_output.getvalue(), "####\n####\n####\n")
+
+    def test_negative_width_display(self):
+        with self.assertRaises(ValueError):
+            r7 = Rectangle(-4, 3)
+
+    def test_zero_width_display(self):
+        with self.assertRaises(ValueError):
+            r8 = Rectangle(0, 3)
+
+    def test_display_width_not_int(self):
+        with self.assertRaises(TypeError):
+            r9 = Rectangle("Name", 3)
+
+    def test_negative_height_display(self):
+        with self.assertRaises(ValueError):
+            r7 = Rectangle(4, -3)
+
+    def test_zero_height_display(self):
+        with self.assertRaises(ValueError):
+            r8 = Rectangle(10, 0)
+
+    def test_display_width_not_int(self):
+        with self.assertRaises(TypeError):
+            r9 = Rectangle(4, "3")
+
+    def test_display_0_attr_rect(self):
+        with self.assertRaises(TypeError):
+            r7 = Rectangle()
+
+    def test_display_1_attr(self):
+        with self.assertRaises(TypeError):
+            r7 = Rectangle(4)
+
+    def test_display_excess_attrs(self):
+        with self.assertRaises(TypeError):
+            r7 = Rectangle(*(range(5, 11)))
