@@ -216,3 +216,57 @@ class TestRectangle_Display(unittest.TestCase):
     def test_display_excess_attrs(self):
         with self.assertRaises(TypeError):
             r7 = Rectangle(*(range(5, 11)))
+
+class TestRectangle_str_rep(unittest.TestCase):
+
+    def test_valid_str_rep_2(self):
+        r6 = Rectangle(4, 3)
+        self.assertEqual(str(r6), f"[Rectangle] ({r6.id}) 0/0 - 4/3")
+
+    def test_valid_str_rep_3(self):
+        r6 = Rectangle(4, 3, 2)
+        self.assertEqual(str(r6), f"[Rectangle] ({r6.id}) 2/0 - 4/3")
+
+    def test_valid_str_rep_4(self):
+        r6 = Rectangle(4, 3, 2, 7)
+        self.assertEqual(str(r6), f"[Rectangle] ({r6.id}) 2/7 - 4/3")
+
+    def test_valid_str_rep_5(self):
+        r6 = Rectangle(4, 3, 2, 7, 32)
+        self.assertEqual(str(r6), f"[Rectangle] ({r6.id}) 2/7 - 4/3")
+
+    def test_negative_width_str_rep(self):
+        with self.assertRaises(ValueError):
+            r7 = Rectangle(-4, 3)
+
+    def test_zero_width_str_rep(self):
+        with self.assertRaises(ValueError):
+            r8 = Rectangle(0, 3)
+
+    def test_str_rep_width_not_int(self):
+        with self.assertRaises(TypeError):
+            r9 = Rectangle("Name", 3)
+
+    def test_negative_height_str_rep(self):
+        with self.assertRaises(ValueError):
+            r7 = Rectangle(4, -3)
+
+    def test_zero_height_str_rep(self):
+        with self.assertRaises(ValueError):
+            r8 = Rectangle(10, 0)
+
+    def test_str_rep_width_not_int(self):
+        with self.assertRaises(TypeError):
+            r9 = Rectangle(4, "3")
+
+    def test_str_rep_0_attr_rect(self):
+        with self.assertRaises(TypeError):
+            r7 = Rectangle()
+
+    def test_str_rep_1_attr(self):
+        with self.assertRaises(TypeError):
+            r7 = Rectangle(4)
+
+    def test_str_rep_excess_attrs(self):
+        with self.assertRaises(TypeError):
+            r7 = Rectangle(*(range(5, 11)))
