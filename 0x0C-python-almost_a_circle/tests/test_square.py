@@ -168,3 +168,17 @@ class TestRectangle_str_rep(unittest.TestCase):
     def test_str_rep_y_not_int(self):
         with self.assertRaises(TypeError):
             sq6 = Square(5, 4, "Name")
+
+class TestSquare_size_validation(unittest.TestCase):
+
+    def test_neg_size(self):
+        with self.assertRaises(ValueError):
+            sq = Square(-10)
+
+    def test_zero_size(self):
+        with self.assertRaises(ValueError):
+            sq1 = Square(0)
+
+    def test_size_type(self):
+        with self.assertRaises(TypeError):
+            sq2 = Square("Hello")
