@@ -59,24 +59,58 @@ class TestSquare_Instantiation(unittest.TestCase):
     def test_excess_args(self):
         with self.assertRaises(TypeError):
             sqx = Square(*(range(10)))
-"""
+
     def test_private_width(self):
-        rect = Rectangle(10, 20, 5, 7, 49)
+        sq5 = Square(20, 5, 7, 49)
         with self.assertRaises(AttributeError):
-            print(rect.__width)
+            print(sq5.__width)
 
     def test_private_height(self):
-        rect = Rectangle(10, 20, 5, 7, 49)
+        sq6 = Square(10, 5, 7, 49)
         with self.assertRaises(AttributeError):
-            print(rect.__height)
+            print(sq6.__height)
 
     def test_private_x(self):
-        rect = Rectangle(10, 20, 5, 7, 49)
+        sq7 = Square(10, 5, 7, 49)
         with self.assertRaises(AttributeError):
-            print(rect.__x)
+            print(sq7.__x)
 
     def test_private_y(self):
-        rect = Rectangle(10, 20, 5, 7, 49)
+        sq8 = Square(10, 5, 7, 49)
         with self.assertRaises(AttributeError):
-            print(rect.__y)
-"""
+            print(sq8.__y)
+
+
+class TestSquare_size_validation(unittest.TestCase):
+
+    def test_neg_size(self):
+        with self.assertRaises(ValueError):
+            sq = Square(-10)
+
+    def test_zero_size(self):
+        with self.assertRaises(ValueError):
+            sq1 = Square(0)
+
+    def test_size_type(self):
+        with self.assertRaises(TypeError):
+            sq2 = Square("Hello")
+
+class TestSquare_x_validation(unittest.TestCase):
+
+    def test_negative_x(self):
+        with self.assertRaises(ValueError):
+            sq = Square(10, -5)
+
+    def test_x_type(self):
+        with self.assertRaises(TypeError):
+            sq1 = Square(10, (34, 43))
+
+class TestSquare_y_validation(unittest.TestCase):
+
+    def test_negative_y(self):
+        with self.assertRaises(ValueError):
+            sq = Square(10, 5, -25)
+
+    def test_y_type(self):
+        with self.assertRaises(TypeError):
+            rect = Rectangle(10, 34, ["One", "Two", "Three"])
