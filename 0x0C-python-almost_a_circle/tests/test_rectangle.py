@@ -311,3 +311,90 @@ class TestRectangle_str_rep(unittest.TestCase):
     def test_str_rep_excess_attrs(self):
         with self.assertRaises(TypeError):
             r7 = Rectangle(*(range(5, 11)))
+
+class TestRectangle_Update(unittest.TestCase):
+
+    def test_update_0_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update()
+        self.assertEqual(str(r1), f"[Rectangle] ({r1.id}) 10/10 - 10/10")
+
+    def test_update_1_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89)
+        self.assertEqual(str(r1), f"[Rectangle] ({r1.id}) 10/10 - 10/10")
+
+    def test_update_2_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2)
+        self.assertEqual(str(r1), f"[Rectangle] ({r1.id}) 10/10 - 2/10")
+
+    def test_update_3_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3)
+        self.assertEqual(str(r1), f"[Rectangle] ({r1.id}) 10/10 - 2/3")
+
+    def test_update_4_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3, 4)
+        self.assertEqual(str(r1), f"[Rectangle] ({r1.id}) 4/10 - 2/3")
+
+    def test_update_5_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(89, 2, 3, 4, 5)
+        self.assertEqual(str(r1), f"[Rectangle] ({r1.id}) 4/5 - 2/3")
+
+    def test_update_excess_args(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            r1.update(*(range(5, 12)))
+
+    def test_update_non_int_2nd_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            r1.update(23, "Hello")
+
+    def test_update_non_int_3rd_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            r1.update(2, 4, "Hello")
+
+    def test_update_non_int_4th_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            r1.update(2, 4, 6, "Hello")
+
+    def test_update_non_int_5th_arg(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            r1.update(2, 4, 6, 8, "Hello")
+
+    def test_update_zero_width(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(ValueError):
+            r1.update(2, 0)
+
+    def test_update_zero_height(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(ValueError):
+            r1.update(2, 4, 0)
+
+    def test_update_negative_width(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(ValueError):
+            r1.update(2, -5)
+
+    def test_update_negative_height(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(ValueError):
+            r1.update(2, 4, -5)
+
+    def test_update_negative_x(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(ValueError):
+            r1.update(2, 3, 4, -2)
+
+    def test_update_negative_y(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        with self.assertRaises(ValueError):
+            r1.update(2, 4, 6, 8, -10)

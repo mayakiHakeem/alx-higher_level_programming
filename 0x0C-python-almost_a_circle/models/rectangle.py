@@ -144,3 +144,15 @@ class Rectangle(Base):
             "[Rectangle] ({}) {}/{} - {}/{}"
             .format(self.id, self.x, self.y, self.width, self.height)
         )
+
+    def update(self, *args):
+        """Update the attr of the Rectangle object.
+
+        Raises:
+            TypeError: if number of args is greater than 5
+        """
+        if len(args) > 5:
+            raise TypeError()
+        attrs = ['id', 'width', 'height', 'x', 'y']
+        for attr, value in zip(attrs, args):
+            setattr(self, attr, value)
