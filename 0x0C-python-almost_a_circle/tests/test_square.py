@@ -271,3 +271,29 @@ class TestSquare_Update(unittest.TestCase):
         self.assertEqual(sq5.size, 40)
         self.assertEqual(sq5.x, 50)
         self.assertEqual(sq5.y, 10)
+
+class TestRectangle_to_dictionary(unittest.TestCase):
+
+    def test_dict_instance(self):
+        r4 = Rectangle(10, 20, 30, 40, 50)
+        dict_rep = r4.to_dictionary()
+        self.assertIsInstance(dict_rep, dict)
+
+    def test_dict_valid(self):
+        r1 = Rectangle(10, 5)
+        dict_rep = r1.to_dictionary()
+        self.assertEqual(dict_rep, (
+            {'id': 13, 'width': 10, 'height': 5, 'x': 0, 'y': 0})
+                         )
+
+    def test_dict_unpacking(self):
+        r1 = Rectangle(10, 2, 1, 9)
+        r1_dict = r1.to_dictionary()
+        r2 = Rectangle(1, 1)
+        r2.update(**r1_dict)
+        self.assertFalse(r1 == r2)
+
+    def test_dict_with_excess_args(self):
+        with self.assertRaises(TypeError):
+            rect = Rectangle(2, 1)
+            rect.to_dictionary(1)

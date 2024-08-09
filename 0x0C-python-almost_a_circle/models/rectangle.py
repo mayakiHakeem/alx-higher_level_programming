@@ -164,3 +164,17 @@ class Rectangle(Base):
         for key, value in kwargs.items():
             if key not in attrs[:len(args)]:
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """Returns the dictionary representation of a Rectangle obj.
+
+        Returns:
+            dict_rep (dict): dictionary rep of obj
+        """
+        attrs = ['id', 'width', 'height', 'x', 'y']
+        dict_rep = {}
+
+        for item in attrs:
+            attr = getattr(self, item)
+            dict_rep[item] = attr
+        return dict_rep
