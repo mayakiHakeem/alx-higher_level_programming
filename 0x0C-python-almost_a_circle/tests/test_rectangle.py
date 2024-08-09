@@ -19,31 +19,34 @@ class TestRectangle_Instantiation(unittest.TestCase):
             rect = Rectangle(10)
 
     def test_2_args(self):
-        rect = Rectangle(10, 20)
+        r = Rectangle(10, 20)
+        r1 = Rectangle(5, 15)
 
-        self.assertEqual(rect.width, 10)
-        self.assertEqual(rect.height, 20)
-        self.assertEqual(rect.x, 0)
-        self.assertEqual(rect.y, 0)
-        self.assertEqual(rect.id, 1)
+        self.assertEqual(r.width, 10)
+        self.assertEqual(r.height, 20)
+        self.assertEqual(r.x, 0)
+        self.assertEqual(r.y, 0)
+        self.assertEqual(r.id, r1.id - 1)
 
     def test_3_args(self):
         rect = Rectangle(10, 20, 5)
+        rect1 = Rectangle(5, 15, 3)
 
         self.assertEqual(rect.width, 10)
         self.assertEqual(rect.height, 20)
         self.assertEqual(rect.x, 5)
         self.assertEqual(rect.y, 0)
-        self.assertEqual(rect.id, 2)
+        self.assertEqual(rect.id, rect1.id - 1)
 
     def test_4_args(self):
-        rect = Rectangle(10, 20, 5, 7)
+        rect2 = Rectangle(10, 20, 5, 7)
+        rect3 = Rectangle(5, 15, 3, 5)
 
-        self.assertEqual(rect.width, 10)
-        self.assertEqual(rect.height, 20)
-        self.assertEqual(rect.x, 5)
-        self.assertEqual(rect.y, 7)
-        self.assertEqual(rect.id, 3)
+        self.assertEqual(rect2.width, 10)
+        self.assertEqual(rect2.height, 20)
+        self.assertEqual(rect2.x, 5)
+        self.assertEqual(rect2.y, 7)
+        self.assertEqual(rect2.id, rect3.id -1)
 
     def test_5_args(self):
         rect = Rectangle(10, 20, 5, 7, 49)
@@ -129,3 +132,33 @@ class TestRectangle_y_validation(unittest.TestCase):
     def test_y_type(self):
         with self.assertRaises(TypeError):
             rect = Rectangle(10, 20, 34, ["One", "Two", "Three"])
+
+class TestRectangle_Area(unittest.TestCase):
+
+    def test_area_valid(self):
+        rect = Rectangle(10, 20)
+        self.assertEqual(rect.area(), 200)
+
+    def test_zero_width(self):
+        with self.assertRaises(ValueError):
+            rect = Rectangle(0, 20)
+
+    def test_zero_height(self):
+        with self.assertRaises(ValueError):
+            rect = Rectangle(10, 0)
+
+    def test_negative_width(self):
+        with self.assertRaises(ValueError):
+            rect = Rectangle(-10, 20)
+
+    def test_negative_height(self):
+        with self.assertRaises(ValueError):
+            rect = Rectangle(10, -20)
+
+    def test_width_not_int(self):
+        with self.assertRaises(TypeError):
+            rect = Rectangle("Python", 20)
+
+    def test_height_not_int(self):
+        with self.assertRaises(TypeError):
+            rect = Rectangle(10, "C is fun")
