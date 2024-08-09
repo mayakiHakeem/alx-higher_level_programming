@@ -217,6 +217,47 @@ class TestRectangle_Display(unittest.TestCase):
         with self.assertRaises(TypeError):
             r7 = Rectangle(*(range(5, 11)))
 
+    def test_display_valid_x(self):
+        rect = Rectangle(3, 2, 2)
+        with patch("sys.stdout", new=io.StringIO()) as displayed_out:
+            rect.display()
+            self.assertEqual(displayed_out.getvalue(), "  ###\n  ###\n")
+
+    def test_display_valid_x_y(self):
+        rect1 = Rectangle(3, 2, 2, 1)
+        with patch("sys.stdout", new=io.StringIO()) as displayed_out:
+            rect1.display()
+            self.assertEqual(displayed_out.getvalue(), "\n  ###\n  ###\n")
+
+    def test_display_valid_y_x_0(self):
+        rect = Rectangle(3, 2, 0, 2)
+        with patch("sys.stdout", new=io.StringIO()) as displayed_out:
+            rect.display()
+            self.assertEqual(displayed_out.getvalue(), "\n\n###\n###\n")
+
+    def test_display_negative_x(self):
+        with self.assertRaises(ValueError):
+            rect = Rectangle(3, 2, -2, 4)
+
+    def test_display_negative_y(self):
+        with self.assertRaises(ValueError):
+            rect = Rectangle(3, 2, 2, -4)
+
+    def test_display_x_not_int(self):
+        with self.assertRaises(TypeError):
+            rect = Rectangle(3, 2, "Hi", 4)
+
+    def test_display_y_not_int(self):
+        with self.assertRaises(TypeError):
+            rect = Rectangle(3, 2, 2, "Hello")
+
+    def test_display_valid_x_y_id(self):
+        rect1 = Rectangle(3, 2, 2, 1, 28)
+        with patch("sys.stdout", new=io.StringIO()) as displayed_out:
+            rect1.display()
+            self.assertEqual(displayed_out.getvalue(), "\n  ###\n  ###\n")
+            self.assertEqual(rect1.id, 28)
+
 class TestRectangle_str_rep(unittest.TestCase):
 
     def test_valid_str_rep_2(self):
