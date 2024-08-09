@@ -145,14 +145,22 @@ class Rectangle(Base):
             .format(self.id, self.x, self.y, self.width, self.height)
         )
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """Update the attr of the Rectangle object.
 
+        Args:
+            *args: Non-keyword arguments to update attributes in order
+            **kwargs: Keyword arguments to update attributes by name
         Raises:
             TypeError: if number of args is greater than 5
         """
         if len(args) > 5:
             raise TypeError()
+
         attrs = ['id', 'width', 'height', 'x', 'y']
         for attr, value in zip(attrs, args):
             setattr(self, attr, value)
+
+        for key, value in kwargs.items():
+            if key not in attrs[:len(args)]:
+                setattr(self, key, value)

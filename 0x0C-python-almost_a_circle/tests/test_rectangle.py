@@ -398,3 +398,25 @@ class TestRectangle_Update(unittest.TestCase):
         r1 = Rectangle(10, 10, 10, 10)
         with self.assertRaises(ValueError):
             r1.update(2, 4, 6, 8, -10)
+
+    def test_update_kwargs(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(id=20, width=30)
+        self.assertEqual(r1.id, 20)
+        self.assertEqual(r1.width, 30)
+
+    def test_update_args_kwargs(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(20, 30, height=40, y=50)
+        self.assertEqual(r1.id, 20)
+        self.assertEqual(r1.width, 30)
+        self.assertEqual(r1.height, 40)
+        self.assertEqual(r1.y, 50)
+
+    def test_update_args_skip_kwargs(self):
+        r1 = Rectangle(10, 10, 10, 10)
+        r1.update(20, 30, 40, 50, id=60)
+        self.assertEqual(r1.id, 20)
+        self.assertEqual(r1.width, 30)
+        self.assertEqual(r1.height, 40)
+        self.assertEqual(r1.x, 50)
