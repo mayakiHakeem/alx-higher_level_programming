@@ -30,6 +30,3 @@ class Square(Rectangle):
             "[Square] ({}) {}/{} - {}"
             .format(self.id, self.x, self.y, self.size)
             )
-
-    def d(self):
-        pass
