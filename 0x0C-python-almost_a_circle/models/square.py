@@ -17,10 +17,8 @@ class Square(Rectangle):
             y (int, optional): The y-coordinate. Defaults to 0.
             id (int, optional): The ID of the rectangle. Defaults to None.
         """
-        super().__init__(size, size, x=0, y=0, id=None)
+        super().__init__(size, size, x, y, id)
         self.size = size
-        self.x = x
-        self.y = y
 
     def __str__(self):
         """Get string of Square obj.
@@ -32,3 +30,6 @@ class Square(Rectangle):
             "[Square] ({}) {}/{} - {}"
             .format(self.id, self.x, self.y, self.size)
             )
+
+    def d(self):
+        pass

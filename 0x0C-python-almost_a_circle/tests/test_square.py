@@ -114,3 +114,57 @@ class TestSquare_y_validation(unittest.TestCase):
     def test_y_type(self):
         with self.assertRaises(TypeError):
             rect = Rectangle(10, 34, ["One", "Two", "Three"])
+
+class TestRectangle_str_rep(unittest.TestCase):
+
+    def test_valid_str_rep_1(self):
+        sq = Square(4)
+        self.assertEqual(str(sq), f"[Square] ({sq.id}) 0/0 - 4")
+
+    def test_valid_str_rep_2(self):
+        sq1 = Square(4, 3)
+        self.assertEqual(str(sq1), f"[Square] ({sq1.id}) 3/0 - 4")
+
+    def test_valid_str_rep_3(self):
+        sq2 = Square(4, 3, 2)
+        self.assertEqual(str(sq2), f"[Square] ({sq2.id}) 3/2 - 4")
+
+    def test_valid_str_rep_4(self):
+        sq3 = Square(4, 3, 2, 8)
+        self.assertEqual(str(sq3), f"[Square] ({sq3.id}) 3/2 - 4")
+
+    def test_negative_size_str_rep(self):
+        with self.assertRaises(ValueError):
+            sq4 = Square(-4)
+
+    def test_zero_size_str_rep(self):
+        with self.assertRaises(ValueError):
+            sq5 = Square(0)
+
+    def test_str_rep_size_not_int(self):
+        with self.assertRaises(TypeError):
+            sq6 = Square("Name")
+
+    def test_str_rep_0_attr_rect(self):
+        with self.assertRaises(TypeError):
+            sq7 = Square()
+
+    def test_str_rep_excess_attrs(self):
+        with self.assertRaises(TypeError):
+            sq = Square(*(range(5, 10)))
+
+    def test_negative_x_str_rep(self):
+        with self.assertRaises(ValueError):
+            sq4 = Square(5, -4)
+
+    def test_str_rep_x_not_int(self):
+        with self.assertRaises(TypeError):
+            sq6 = Square(5, "Name")
+
+    def test_negative_y_str_rep(self):
+        with self.assertRaises(ValueError):
+            sq4 = Square(5, 4, -4)
+
+    def test_str_rep_y_not_int(self):
+        with self.assertRaises(TypeError):
+            sq6 = Square(5, 4, "Name")
