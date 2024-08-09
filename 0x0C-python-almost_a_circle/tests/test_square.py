@@ -272,28 +272,28 @@ class TestSquare_Update(unittest.TestCase):
         self.assertEqual(sq5.x, 50)
         self.assertEqual(sq5.y, 10)
 
-class TestRectangle_to_dictionary(unittest.TestCase):
+class TestSquare_to_dictionary(unittest.TestCase):
 
     def test_dict_instance(self):
-        r4 = Rectangle(10, 20, 30, 40, 50)
-        dict_rep = r4.to_dictionary()
+        s4 = Square(10, 20, 30, 40)
+        dict_rep = s4.to_dictionary()
         self.assertIsInstance(dict_rep, dict)
 
     def test_dict_valid(self):
-        r1 = Rectangle(10, 5)
-        dict_rep = r1.to_dictionary()
+        s1 = Square(5)
+        dict_rep = s1.to_dictionary()
         self.assertEqual(dict_rep, (
-            {'id': 13, 'width': 10, 'height': 5, 'x': 0, 'y': 0})
+            {'id': int(f"{s1.id}"), 'size': 5, 'x': 0, 'y': 0})
                          )
 
     def test_dict_unpacking(self):
-        r1 = Rectangle(10, 2, 1, 9)
-        r1_dict = r1.to_dictionary()
-        r2 = Rectangle(1, 1)
-        r2.update(**r1_dict)
-        self.assertFalse(r1 == r2)
+        s1 = Square(10, 2, 1, 9)
+        s1_dict = s1.to_dictionary()
+        s2 = Square(1, 1)
+        s2.update(**s1_dict)
+        self.assertFalse(s1 == s2)
 
     def test_dict_with_excess_args(self):
         with self.assertRaises(TypeError):
-            rect = Rectangle(2, 1)
-            rect.to_dictionary(1)
+            sq = Square(2, 1)
+            sq.to_dictionary(1)
