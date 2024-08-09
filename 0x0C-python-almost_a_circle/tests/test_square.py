@@ -182,3 +182,92 @@ class TestSquare_size_validation(unittest.TestCase):
     def test_size_type(self):
         with self.assertRaises(TypeError):
             sq2 = Square("Hello")
+
+class TestSquare_Update(unittest.TestCase):
+
+    def test_sq_update_0_arg(self):
+        sq1 = Square(10, 10, 10)
+        sq1.update()
+        self.assertEqual(str(sq1), f"[Square] ({sq1.id}) 10/10 - 10")
+
+    def test_sq_update_1_arg(self):
+        sq1 = Square(10, 10, 10)
+        sq1.update(89)
+        self.assertEqual(str(sq1), f"[Square] ({sq1.id}) 10/10 - 10")
+
+    def test_sq_update_2_args(self):
+        sq1 = Square(10, 10, 10)
+        sq1.update(89, 2)
+        self.assertEqual(str(sq1), f"[Square] ({sq1.id}) 10/10 - 2")
+
+    def test_sq_update_3_args(self):
+        sq1 = Square(10, 10, 10)
+        sq1.update(89, 2, 3)
+        self.assertEqual(str(sq1), f"[Square] ({sq1.id}) 3/10 - 2")
+
+    def test_sq_update_4_args(self):
+        sq1 = Square(10, 10, 10)
+        sq1.update(89, 2, 3, 4)
+        self.assertEqual(str(sq1), f"[Square] ({sq1.id}) 3/4 - 2")
+
+    def test_sq_update_excess_args(self):
+        sq1 = Square(10, 10, 10)
+        with self.assertRaises(TypeError):
+            sq1.update(*(range(5, 12)))
+
+    def test_sq_update_non_int_2nd_arg(self):
+        sq1 = Square(10, 10, 10)
+        with self.assertRaises(TypeError):
+            sq1.update(23, "Hello")
+
+    def test_sq_update_non_int_3rd_arg(self):
+        sq1 = Square(10, 10, 10)
+        with self.assertRaises(TypeError):
+            sq1.update(2, 4, "Hello")
+
+    def test_update_non_int_4th_arg(self):
+        r1 = Rectangle(10, 10, 10)
+        with self.assertRaises(TypeError):
+            r1.update(2, 4, 6, "Hello")
+
+    def test_sq_update_zero_size(self):
+        sq2 = Square(10, 10, 10)
+        with self.assertRaises(ValueError):
+            sq2.update(2, 0)
+
+    def test_sq_update_negative_size(self):
+        sq2 = Square(10, 10, 10)
+        with self.assertRaises(ValueError):
+            sq2.update(2, -5)
+
+    def test_sq_update_negative_x(self):
+        sq2 = Square(10, 10, 10)
+        with self.assertRaises(ValueError):
+            sq2.update(2, 4, -2)
+
+    def test_sq_update_negative_y(self):
+        sq2 = Square(10, 10, 10)
+        with self.assertRaises(ValueError):
+            sq2.update(2, 4, 8, -10)
+
+    def test_sq_update_kwargs(self):
+        sq3 = Square(10, 10, 10)
+        sq3.update(id=20, size=30)
+        self.assertEqual(sq3.id, 20)
+        self.assertEqual(sq3.size, 30)
+
+    def test_sq_update_args_kwargs(self):
+        sq4 = Square(10, 10, 10)
+        sq4.update(20, size=40, y=50)
+        self.assertEqual(sq4.id, 20)
+        self.assertEqual(sq4.size, 40)
+        self.assertEqual(sq4.x, 10)
+        self.assertEqual(sq4.y, 50)
+
+    def test_sq_update_args_skip_kwargs(self):
+        sq5 = Square(10, 10, 10)
+        sq5.update(20, 40, 50, id=60)
+        self.assertEqual(sq5.id, 20)
+        self.assertEqual(sq5.size, 40)
+        self.assertEqual(sq5.x, 50)
+        self.assertEqual(sq5.y, 10)

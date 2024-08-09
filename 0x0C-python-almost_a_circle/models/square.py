@@ -21,7 +21,7 @@ class Square(Rectangle):
         self.size = size
 
     def __str__(self):
-        """Get string of Square obj.
+        """Return string of Square obj.
 
         Returns:
             str_form (str): The string form of the Square ibj.
@@ -33,13 +33,48 @@ class Square(Rectangle):
 
     @property
     def size(self):
+        """Get value of the size of Square obj.
+
+        Returns:
+            (int): value of the Square obj.
+        """
         return self.__width
 
     @size.setter
     def size(self, value):
+        """Set value of the size of Square obj.
+
+        Args:
+            value (int): new value of the Square obj size.
+
+        Raises:
+            TypeError: if value is not an integer
+            ValueError: if value is not > 0
+        """
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
             raise ValueError("width must be > 0")
         self.__width = value
         self.__height = value
+
+    def update(self, *args, **kwargs):
+        """Update the attr of the Square object.
+
+        Args:
+            *args: Non-keyword arguments to update attributes in order
+            **kwargs: Keyword arguments to update attributes by name
+        Raises:
+            TypeError: if number of args is greater than 5
+        """
+        if len(args) > 4:
+            raise TypeError()
+
+        attrs = ['id', 'size', 'x', 'y']
+
+        for attr, value in zip(attrs, args):
+            setattr(self, attr, value)
+
+        for key, value in kwargs.items():
+            if key not in attrs[:len(args)]:
+                setattr(self, key, value)
