@@ -31,4 +31,54 @@ class TestBase_Instantiation(unittest.TestCase):
     def test_init_large_args(self):
         self.assertRaises(TypeError, Base, *(range(10)))
 
-    #
+class TestToJsonString(unittest.TestCase):
+
+    def test_single_list_1_dictionary(self):
+        dictionary = {'name': 'John', 'age': 30}
+        expected_json = '[{"name": "John", "age": 30}]'
+        self.assertEqual(Base.to_json_string([dictionary]), expected_json)
+
+    def test_list_of_dictionaries(self):
+        dictionaries = [{'name': 'Joe', 'age': 7}, {'name': 'Ann', 'age': 9}]
+        expected_json = '[{"name": "Joe", "age": 7}, {"name": "Ann", "age": 9}]'
+        self.assertEqual(Base.to_json_string(dictionaries), expected_json)
+
+    def test_empty_list(self):
+        dictionaries = []
+        expected_json = '[]'
+        self.assertEqual(Base.to_json_string(dictionaries), expected_json)
+
+    def test_non_list_of_dictionary_input_str(self):
+        string = "Hello, Guys"
+        with self.assertRaises(TypeError):
+            Base.to_json_string(string)
+
+    def test_non_list_of_dictionary_int_input(self):
+        number = 57
+        with self.assertRaises(TypeError):
+            Base.to_json_string(number)
+
+    def test_non_list_of_dictionary_dict_input(self):
+        dictionary = {'name': 'John', 'is_student': True}
+        with self.assertRaises(TypeError):
+            Base.to_json_string(dictionary)
+
+    def test_list_with_non_dict_input(self):
+        list_with_non_dict = [{'name': 'John'}, 'not a dict']
+        with self.assertRaises(TypeError):
+            Base.to_json_string(list_with_non_dict)
+
+    def test_nested_dictionaries(self):
+        dictionary = {'name': 'Jo', 'ad': {'st': '32 Rd', 'city': 'DC'}}
+        expected_json = '[{"name": "Jo", "ad": {"st": "32 Rd", "city": "DC"}}]'
+        self.assertEqual(Base.to_json_string([dictionary]), expected_json)
+
+    def test_different_data_types(self):
+        dictionary = {'name': 'John', 'is_student': True, 'height': 1.75}
+        expected_json = '[{"name": "John", "is_student": true, "height": 1.75}]'
+        self.assertEqual(Base.to_json_string([dictionary]), expected_json)
+
+    def test_excess_inputs(self):
+        with self.assertRaises(TypeError):
+            dictionary = {'name': 'John', 'is_student': True, 'height': 1.75}
+            Base.to_json_string([dictionary], 4)
