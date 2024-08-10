@@ -34,9 +34,11 @@ class Base:
         Raises:
             TypeError: list_dictionaries not a list or contain non-dict element
         """
+        if list_dictionaries is None:
+            return None
+
         if not isinstance(list_dictionaries, list):
             raise TypeError("list_dictionaries must be a list of dictionaries")
-        if len(list_dictionaries) > 0 and not all(
-                isinstance(item, dict) for item in list_dictionaries):
+        if not all(isinstance(item, dict) for item in list_dictionaries):
             raise TypeError("list_dictionaries must only contain dictionaries")
         return json.dumps(list_dictionaries)
