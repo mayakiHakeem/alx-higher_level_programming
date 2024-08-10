@@ -53,17 +53,19 @@ class Base:
         Raises:
             TypeError: list_objs not a list or contain non-obj type element
         """
+        if list_objs is None:
+            with open(f"{cls.__name__}.json", 'w', encoding="UTF8") as n_file:
+                n_file.write("[]")
+            return
+
         if not isinstance(list_objs, list):
             raise TypeError("list_objs must be a list")
         if not all([isinstance(item, Base) for item in list_objs]):
             raise TypeError("all item of list_objs must be instances of Base")
 
         with open(f"{cls.__name__}.json", 'w', encoding="UTF8") as n_file:
-            if list_objs is None:
-                n_file.write("[]")
-            else:
-                new_list = []
-                for item in list_objs:
-                    it = item.to_dictionary()
-                    new_list.append(it)
-                n_file.write(Base.to_json_string(new_list))
+            new_list = []
+            for item in list_objs:
+                it = item.to_dictionary()
+                new_list.append(it)
+            n_file.write(Base.to_json_string(new_list))
