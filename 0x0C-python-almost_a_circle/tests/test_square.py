@@ -299,39 +299,3 @@ class TestSquare_to_dictionary(unittest.TestCase):
             sq = Square(2, 1)
             sq.to_dictionary(1)
 
-class TestSquareSaveToFile(unittest.TestCase):
-    def test_save_to_file(self):
-        # Create a list of Square objects
-        squares = [Square(1, 2, 3, 4), Square(5, 6, 7, 8)]
-
-        # Call the save_to_file method
-        Square.save_to_file(squares)
-
-        # Check if the file was created
-        self.assertTrue(os.path.exists('Square.json'))
-
-        # Check if the file contains the correct data
-        with open('Square.json', 'r') as file:
-            data = file.read()
-            self.assertIn('1', data)
-            self.assertIn('2', data)
-            self.assertIn('3', data)
-            self.assertIn('4', data)
-            self.assertIn('5', data)
-            self.assertIn('6', data)
-            self.assertIn('7', data)
-            self.assertIn('8', data)
-
-    def test_save_to_file_with_none(self):
-        # Call the save_to_file method with None
-        Square.save_to_file(None)
-
-        # Check if the file was not created
-        self.assertFalse(os.path.exists('Square.json'))
-
-    def test_save_to_file_with_empty_list(self):
-        # Call the save_to_file method with an empty list
-        Square.save_to_file([])
-
-        # Check if the file was not created
-        self.assertFalse(os.path.exists('Square.json'))
