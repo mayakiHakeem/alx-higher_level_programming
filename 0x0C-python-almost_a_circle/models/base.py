@@ -54,7 +54,7 @@ class Base:
         Raises:
             TypeError: list_objs not a list or contain non-obj type element
         """
-        if list_objs is None:
+        if list_objs is None or len(list_objs) == 0:
             with open(f"{cls.__name__}.json", 'w', encoding="UTF8") as n_file:
                 n_file.write("[]")
             return
