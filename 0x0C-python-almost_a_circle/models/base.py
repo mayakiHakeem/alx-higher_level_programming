@@ -63,9 +63,34 @@ class Base:
         if not all([isinstance(item, Base) for item in list_objs]):
             raise TypeError("all item of list_objs must be instances of Base")
 
+        flag = list_objs[0].__class__.__name__
+        for i in range(1, len(list_objs)):
+            if flag != list_objs[i].__class__.__name__:
+                raise TypeError()
+
         with open(f"{cls.__name__}.json", 'w', encoding="UTF8") as n_file:
             new_list = []
             for item in list_objs:
                 it = item.to_dictionary()
                 new_list.append(it)
             n_file.write(Base.to_json_string(new_list))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """Returns data from JSON string repr.
+
+        Args:
+            json_string (json): json string object to convert
+
+        Returns:
+            data: data repr with json str
+
+        Raises:
+            TypeError: if json_string not json obj
+        """
+        if not json_string:
+            return []
+        try:
+            return list(json.loads(json_string))
+        except json.JSONDecodeError:
+            raise TypeError("Invalid JSON string")
