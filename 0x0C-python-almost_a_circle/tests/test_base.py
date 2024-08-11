@@ -202,3 +202,54 @@ class TestFromJsonString(unittest.TestCase):
         json_string = '[{"key": "value"} // comment]'
         with self.assertRaises(TypeError):
             Base.from_json_string(json_string)
+
+class TestCreateMethod(unittest.TestCase):
+
+    def test_create_rectangle_with_valid_dict(self):
+        dictionary = {'width': 4, 'height': 5}
+        instance = Rectangle.create(**dictionary)
+        self.assertEqual(instance.width, 4)
+        self.assertEqual(instance.height, 5)
+
+    def test_create_square_with_valid_dict(self):
+        dictionary = {'size': 4}
+        instance = Square.create(**dictionary)
+        self.assertEqual(instance.size, 4)
+
+    def test_create_with_invalid_dict_type(self):
+        dictionary = 'not a dict'
+        with self.assertRaises(TypeError):
+            Rectangle.create(**dictionary)
+
+    def test_create_rectangle_with_missing_key(self):
+        dictionary = {'width': 4}
+        instance = Rectangle.create(**dictionary)
+        self.assertEqual(instance.width, 4)
+        self.assertEqual(instance.height, 3)  # Default value
+
+    def test_create_square_with_missing_key(self):
+        dictionary = {}
+        instance = Square.create(**dictionary)
+        self.assertEqual(instance.size, 2)  # Default value
+
+    def test_create_rectangle_with_extra_key(self):
+        dictionary = {'width': 4, 'height': 5, 'extra': 'key'}
+        instance = Rectangle.create(**dictionary)
+        self.assertEqual(instance.width, 4)
+        self.assertEqual(instance.height, 5)
+
+    def test_create_square_with_extra_key(self):
+        dictionary = {'size': 4, 'extra': 'key'}
+        instance = Square.create(**dictionary)
+        self.assertEqual(instance.size, 4)
+
+    def test_create_rectangle_with_invalid_key(self):
+        dictionary = {'invalid_key': 4, 'height': 5}
+        instance = Rectangle.create(**dictionary)
+        self.assertEqual(instance.width, 2)  # Default value
+        self.assertEqual(instance.height, 5)
+
+    def test_create_square_with_invalid_key(self):
+        dictionary = {'invalid_key': 4}
+        instance = Square.create(**dictionary)
+        self.assertEqual(instance.size, 2)  # Default value

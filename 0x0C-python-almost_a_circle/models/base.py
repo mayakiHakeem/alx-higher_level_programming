@@ -94,3 +94,25 @@ class Base:
             return list(json.loads(json_string))
         except json.JSONDecodeError:
             raise TypeError("Invalid JSON string")
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Returns a dummy instance with all attributes already set
+
+        Args:
+            dictionary (dict): kwargs
+
+        Returns:
+            dummy_instance:
+        """
+        if not isinstance(dictionary, dict):
+            raise TypeError("dictionary must be an instance of dict")
+
+        if cls.__name__ == 'Rectangle':
+            dummy_instance = cls(2, 3)
+        elif cls.__name__ == 'Square':
+            dummy_instance = cls(2)
+
+        dummy_instance.update(**dictionary)
+
+        return dummy_instance
