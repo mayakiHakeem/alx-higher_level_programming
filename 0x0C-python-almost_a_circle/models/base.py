@@ -116,3 +116,22 @@ class Base:
         dummy_instance.update(**dictionary)
 
         return dummy_instance
+
+    @classmethod
+    def load_from_file(cls):
+        """Return list of instances loaded JSON file
+
+        Raises:
+            TypeError: list_objs not a list or contain non-obj type element
+        """
+        try:
+            with open(f'{cls.__name__}.json', 'r') as file:
+                content = file.read()
+        except FileNotFoundError as e:
+            return []
+
+        list_dict = cls.from_json_string(content)
+
+        list_instances = [cls.create(**dictionary) for dictionary in list_dict]
+
+        return list_instances
